@@ -16,6 +16,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: #253141;
 }
 .name{
   font-size: 16px;
