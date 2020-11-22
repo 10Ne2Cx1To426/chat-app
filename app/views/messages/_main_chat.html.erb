@@ -1,6 +1,6 @@
 <div class="main_head">
   <div class="chat-roomname">
-    <p href="#">hogefuga</p>
+    <%= @room.name %>
   </div>
   <div class="finish-btn">
     <a href="#">チャットを終了する</a>
@@ -8,26 +8,7 @@
 </div>
 
 <div class="main">
-  <div class="chat">
-    <div class="send-name-date">
-      <div class="send-name">Tom</div>
-      <div class="chat-date">2020/3/31(wed) 12:43:30</div>
-    </div>
-    <div class="message">
-    おはよう
-    </div>
-  </div>
-
-  <div class="chat">
-    <div class="send-name-date">
-      <p class="send-name">mickel</p>
-      <p class="chat-date">2020/3/31(wed) 12:43:30</p>
-    </div>
-    <div class="message">
-    やあ
-    </div>
-  </div>
-
+<%= render partial: 'message', collection: @messages %>
 </div>
 
 <%#form_withの引数に@roomと@messageを渡しているのは、messageのルーティングがroomsにネストされているから。

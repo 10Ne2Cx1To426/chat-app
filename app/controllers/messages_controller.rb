@@ -7,6 +7,9 @@ class MessagesController < ApplicationController
   def index
     @message = Message.new
     @room = Room.find(params[:room_id])
+    
+    #チャットルームに紐づいている全てのメッセージ(@room.messages)を@messagesと定義する
+    @messages = @room.messages.includes(:user)
   end
   #`room.message.newで、チャットルームに紐づいたメッセージのインスタンスを生成、
   #message_paramsを引数にしてparamsメソッドを呼び出す
@@ -17,6 +20,9 @@ class MessagesController < ApplicationController
     if @message.save
       redirect_to room_messages_path(@room)
     else
+      #投稿に失敗したとき、@messageの情報を保持しつつindex.html.erbを参照することができる
+      #その際、@messageを定義していないとエラーが出る
+      @messages = @room.messages.includes(:user)
       render :index
     end
   end
