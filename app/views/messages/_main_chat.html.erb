@@ -30,13 +30,17 @@
 
 </div>
 
-<div class="main_bottom">
-  <div class="form">
-    <input class="text" placeholder="type a message">
-    <label class="image">
-      <span class="image-file">画像</span>
-      <input type="file" class="hidden">
-    </label>
-  </div>
-    <input class="send-btn" type="submit" value="送信">
-</div>
+<%#form_withの引数に@roomと@messageを渡しているのは、messageのルーティングがroomsにネストされているから。
+チャットルームとメッセージの間には、あるチャットルームに属しているメッセージ、という親子関係がある%>
+<%= form_with model: [@room, @message], class: 'form', local: true do |f| %>
+  <%#modelオプションに記載した@roomには、指定のチャットルームのレコード情報、
+  @messageには、Messageモデルからのインスタンスを予めセットする必要がある。%>
+    <div class="form_input">
+      <%= f.text_field :content, class: 'form-message', placeholder: 'type a message' %>
+      <label class="form-image">
+        <span class="image-file">画像</span>
+        <%=f.file_field :image, class: 'hidden' %>
+      </label>
+    </div>
+    <%= f.submit '送信', class: 'form-submit' %>
+<% end %>

@@ -106,34 +106,38 @@
   color: #434a54;
 }
 /*form*/
-.main_bottom{
+
+.form {
+  background-color: #DDDDDD;
   height: 90px;
-  background-color: #dddddd;
   padding: 20px 40px;
   display: flex;
 }
-.form{
-  width: 100%;
+
+.form-input {
   background-color: white;
   display: flex;
-}
-.text{
-  padding-left: 10px;
-  border: none;
   width: 100%;
-  height: 50px;
 }
-.send-btn{
-  height: 50px;
-  padding: 0 20px;
-  background-color: #38aef0;
-  margin-left: 15px;
-  font-size: 16px;
-  color: white;
+
+.form-message {
   border: none;
-  cursor: pointer;
+  height: 50px;
+  width: 100%;
+  padding-left: 10px;
 }
-.image{
+
+.form-submit {
+  background-color: #38AEF0;
+  border: none;
+  color: white;
+  font-size: 16px;
+  height: 50px;
+  margin-left: 15px;
+  padding: 0 20px;
+}
+
+.form-image {
   font-size: 12px;
   background-color: lightblue;
   color: white;
@@ -141,8 +145,8 @@
   width: 60px;
   margin: 5px 10px;
   text-align: center;
-  cursor: pointer;
 }
-.hidden{
+
+.hidden {
   display: none;
 }
