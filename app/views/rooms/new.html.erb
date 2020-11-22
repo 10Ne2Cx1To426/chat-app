@@ -1,0 +1,45 @@
+<div class='chat-room-form'>
+  <h1>新規チャットルーム</h1>
+  <%#modelオプションに@roomを指定したことで、@roomのクラス名であるroomがキーとなり、値にはこのフォームから送られる
+  パラメータがハッシュとして入る%>
+  <%=form_with model: @room, local: true do |f|%>
+    <div class='chat-room-form__field'>
+      <div class='chat-room-form__field--left'>
+        <%= f.label :チャットルーム名, class: 'chat-room-form__label'%>
+      </div>
+      <div class='chat-room-form__field--right'>
+        <%= f.text_field :name, class: 'chat__room_name chat-room-form__input', placeholder: 'チャットルーム名を入力してください'%>
+      </div>
+    </div>
+    <div class='chat-room-form__field'>
+    </div>
+    <div class='chat-room-form__field'>
+      <div class='chat-room-form__field--left'>
+        <label class='chat-room-form__label' for='chat_room_チャットメンバー'>チャットメンバー</label>
+      </div>
+      <div class='chat-room-form__field--right'>
+        <select name="room[user_ids][]">
+          <option>チャットするユーザーを洗濯してください</option>
+          <%#select要素のname属性にroom[user_ids][]を指定し、
+             option要素のvalue属性にuser.idを指定することで、paramsを送信
+             送られるパラメーターは
+             {"room" => {"user_ids" => ["洗濯したユーザーのid"]}}
+             まず、room[user_ids]という記述は、値としてさらにハッシュを入れ子にしている
+             []は、キーに対する値を配列として格納することを示している%>
+          <% User.where.not(id: current_user.id).each do |user| %>
+            <option value=<%= user.id %>><%= user.name %></option>
+          <% end %>
+        </select>
+        <%#上のままでは現在ログイン中のユーザーのidを送信することができないため、
+        以下のように入力し、ログイン中のユーザーのidも一緒にparamsで送信できるよう実装する%>
+        <input name="room[user_ids][]" type="hidden" value=<%= current_user.id %>>
+      </div>
+    </div>
+    <div class='chat-room-form__field'>
+      <div class='chat-room-form__field--left'></div>
+      <div class='chat-room-form__field--right'>
+        <%= f.submit class: 'chat-room-form__action-btn'%>
+      </div>
+    </div>
+  <% end %><%#←ここまでの情報がform_withで送信される%>
+</div>
