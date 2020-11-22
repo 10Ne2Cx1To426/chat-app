@@ -110,6 +110,7 @@
   font-size: 14px;
   margin-bottom: 40px;
 }
+
 /*form*/
 
 .form {
@@ -154,4 +155,7 @@
 
 .hidden {
   display: none;
+}
+.field_with_errors {
+  display: contents;
 }
