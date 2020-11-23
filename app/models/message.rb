@@ -1,5 +1,5 @@
 class Message < ApplicationRecord
-  validates :content, presence: true
+  validates :content, presence: true, unless: :was_attached? #←メソッドの返り値がfalseならバリる
 
   belongs_to :room
   belongs_to :user
@@ -11,4 +11,9 @@ class Message < ApplicationRecord
   #ファイル名は、そのモデルが紐づいたフォームから送られるパラメーターのキーにもなる
 
   has_one_attached :image
+
+  #画像があればtrue,なければfalse
+  def was_attached?
+    self.image.attached?
+  end
 end
